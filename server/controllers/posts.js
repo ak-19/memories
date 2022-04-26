@@ -1,17 +1,21 @@
-import PostMessage from '../models/postMessage.js'
+import PostMessage from "../models/postMessage.js";
 
-export const getPosts = async (req, res) => {
+export const getPosts = async (_, res) => {
+  try {
     const response = await PostMessage.find();
-    console.log(response);
-    res.send('This is posts controller');
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
 
 export const createPosts = async (req, res) => {
-    const response = await PostMessage.create({
-            title: 'Hello',
-            message: 'Hello message',
-            creator: 'Ante'
-    })
-    console.log(response);
-    res.send('Making posts');
-}
+  try {
+    const { body } = req;
+    console.log(body);
+    const response = await PostMessage.create(body);
+    res.json(response);
+  } catch (error) {
+    res.json(error);
+  }
+};
