@@ -14,8 +14,8 @@ export const createPosts = async (req, res) => {
     const { body } = req;
     console.log(body);
     const response = await PostMessage.create(body);
-    res.json(response);
+    res.status(201).json(response);
   } catch (error) {
-    res.json(error);
+    res.status(409).json(error);
   }
 };
