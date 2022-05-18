@@ -1,6 +1,4 @@
-import { createTheme } from '@mui/material/styles';
-
-export default createTheme(() => ({
+const styles = {
     appBar: {
         borderRadius: 15,
         margin: '30px 0',
@@ -15,4 +13,6 @@ export default createTheme(() => ({
     image: {
         marginLeft: '15px',
     },
-}));
+};
+
+export default styles;
