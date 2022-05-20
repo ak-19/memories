@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import Post from './Post/post';
-// import styles from './styles';
+import './posts.css';
 
 const renderPosts = (posts) => {
     if (posts.length) {

@@ -1,8 +1,7 @@
 import React from 'react'
-import styles from './styles';
+import './post.css';
 
 export default function Post(props) {
-    console.log(props.post);
     return (
         <div>Post</div>
     )
