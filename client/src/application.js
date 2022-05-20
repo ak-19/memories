@@ -7,7 +7,7 @@ import Form from './components/Form/form';
 import Posts from './components/Posts/posts';
 import { getPost } from './actions/posts'
 
-import styles from './applicationStyles';
+import './application.css';
 
 const Application = () => {
   const dispatch = useDispatch()
@@ -18,9 +18,9 @@ const Application = () => {
 
   return (
     <Container maxwidth="lg">
-      <AppBar style={styles.appBar} position="static" color="inherit">
-        <Typography style={styles.heading} variant="h2" align="center"> Memories </Typography>
-        <img style={styles.image} src={memories} alt="memories" height="120" />
+      <AppBar className="appBar" position="static" color="inherit">
+        <Typography className="heading" variant="h2" align="center"> Memories </Typography>
+        <img className="image" src={memories} alt="memories" height="120" />
       </AppBar>
       <Grow in>
         <Container>
