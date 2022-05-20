@@ -1,11 +1,11 @@
-const reducer = (state = [], action) => {
+const reducer = (posts = [], action) => {
     switch (action.type) {
         case 'CREATE':
-            return { ...state }
+            return [...posts, action.payload]
         case 'FETCH_ALL':
             return action.payload;
         default:
-            return { ...state }
+            return { ...posts }
     }
 }
 

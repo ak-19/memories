@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import FileBase from 'react-file-base64';
 import { TextField, Button, Typography, Paper } from '@mui/material';
-
+import { createPost } from '../../actions/posts'
 import './form.css';
 
 export default function Form() {
     const [postData, setPostData] = useState({
         creator: '', message: '', title: '', tags: '', selectedFile: ''
     })
+
+    const dispatch = useDispatch();
 
     const clearForm = () => {
         setPostData({
@@ -16,7 +19,9 @@ export default function Form() {
     }
 
     const handleSubmit = (e) => {
-        console.log('Submitting...');
+        e.preventDefault();
+        dispatch(createPost(postData))
+        clearForm()
     }
 
     return (
