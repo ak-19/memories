@@ -5,7 +5,7 @@ import { Delete, MoreHoriz, ThumbUpAlt } from '@mui/icons-material';
 
 import './post.css';
 
-export default function Post({ post }) {
+export default function Post({ post, setCurrentId }) {
     return (
         <Card className='card'>
             <CardMedia className='media' image={post.selectedFile} title={post.title} />
@@ -14,7 +14,7 @@ export default function Post({ post }) {
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className='overlay2'>
-                <Button style={{ color: 'white' }} size="small" onClick={() => { }}>
+                <Button style={{ color: 'white' }} size="small" onClick={() => { setCurrentId(post._id) }}>
                     <MoreHoriz fontSize='default' />
                 </Button>
             </div>
