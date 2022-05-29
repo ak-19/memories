@@ -2,10 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import { Button, Card, CardActions, CardMedia, CardContent, Typography } from '@mui/material';
 import { Delete, MoreHoriz, ThumbUpAlt } from '@mui/icons-material';
-
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../../actions/posts'
 import './post.css';
 
 export default function Post({ post, setCurrentId }) {
+    const dispatch = useDispatch();
     return (
         <Card className='card'>
             <CardMedia className='media' image={post.selectedFile} title={post.title} />
@@ -30,7 +32,7 @@ export default function Post({ post, setCurrentId }) {
                     Like
                     {post.likeCount}
                 </Button>
-                <Button size="small" onClick={() => { }} color="primary">
+                <Button size="small" onClick={() => { dispatch(deletePost(post._id)) }} color="primary">
                     <Delete fontSize='small' />
                     Delete
                 </Button>
