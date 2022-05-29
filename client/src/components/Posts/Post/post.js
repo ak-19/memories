@@ -30,7 +30,7 @@ export default function Post({ post, setCurrentId }) {
             <CardActions className='cardActions'>
                 <Button size="small" onClick={() => { dispatch(likePost(post._id)) }} color="primary">
                     <ThumbUpAlt fontSize='small' />
-                    Like
+                    &nbsp;Like &nbsp;
                     {post.likeCount}
                 </Button>
                 <Button size="small" onClick={() => { dispatch(deletePost(post._id)) }} color="primary">
