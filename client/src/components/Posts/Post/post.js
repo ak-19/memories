@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Button, Card, CardActions, CardMedia, CardContent, Typography } from '@mui/material';
 import { Delete, MoreHoriz, ThumbUpAlt } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../actions/posts'
+import { likePost, deletePost } from '../../../actions/posts'
 import './post.css';
 
 export default function Post({ post, setCurrentId }) {
@@ -27,7 +27,7 @@ export default function Post({ post, setCurrentId }) {
                 <Typography className="title" variant="h5" gutterBottom>{post.message}</Typography>
             </CardContent>
             <CardActions className='cardActions'>
-                <Button size="small" onClick={() => { }} color="primary">
+                <Button size="small" onClick={() => { dispatch(likePost(post._id)) }} color="primary">
                     <ThumbUpAlt fontSize='small' />
                     Like
                     {post.likeCount}
