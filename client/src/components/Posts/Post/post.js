@@ -23,8 +23,9 @@ export default function Post({ post, setCurrentId }) {
             <div className='details'>
                 <Typography varian="body2" color="textSecondary">{post.tags.map(tag => `#${tag} `)}</Typography>
             </div>
+            <Typography className="title" color="textSecondary" variant="h5">{post.title}   </Typography>
             <CardContent>
-                <Typography className="title" variant="h5" gutterBottom>{post.message}</Typography>
+                <Typography variant="body2" color="textSecondary" component="p" >{post.message}</Typography>
             </CardContent>
             <CardActions className='cardActions'>
                 <Button size="small" onClick={() => { dispatch(likePost(post._id)) }} color="primary">
