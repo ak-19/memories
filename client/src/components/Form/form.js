@@ -20,10 +20,10 @@ export default function Form({ currentId, setCurrentId }) {
     const dispatch = useDispatch();
 
     const clearForm = () => {
+        setCurrentId(null)
         setPostData({
             creator: '', message: '', title: '', tags: '', selectedFile: ''
         })
-        setCurrentId(null)
     }
 
     const handleSubmit = (e) => {
@@ -33,8 +33,8 @@ export default function Form({ currentId, setCurrentId }) {
             dispatch(updatePost(currentId, postData))
         } else {
             dispatch(createPost(postData))
-            clearForm()
         }
+        clearForm()
     }
 
     return (

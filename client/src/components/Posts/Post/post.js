@@ -21,7 +21,7 @@ export default function Post({ post, setCurrentId }) {
                 </Button>
             </div>
             <div className='details'>
-                <Typography varian="body2" color="textSecondary">{post.tags.map(tag => `#${tag} `)}</Typography>
+                <Typography varian="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
             </div>
             <Typography className="title" color="textSecondary" variant="h5">{post.title}   </Typography>
             <CardContent>
