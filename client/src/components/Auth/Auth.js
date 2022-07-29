@@ -8,16 +8,20 @@ import "./Auth.css";
 import Input from "../Input";
 
 const Auth = () => {
-  const isSignUp = false;
-
   const [showPassword, setShowPassword] = useState(false);
+  const [isSignUp, setSignUp] = useState(false);
 
   const handleSubmit = (e) => {};
   const handleChange = (e) => {};
   const handleShowPassword = (e) => setShowPassword((prevState) => !prevState);
 
+  const switchMode = () => {
+    setSignUp(!isSignUp);
+    setShowPassword(false);
+  };
+
   return (
-    <Container omponent="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs">
       <Paper className="paper" elevation={3}>
         <Avatar className="avatar">
           <LockOutlined />
@@ -39,6 +43,11 @@ const Auth = () => {
           <Button type="submit" fullWidth variant="contained" color="primary" className="submit">
             {isSignUp ? "Sign up" : "Sign in"}
           </Button>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Button onClick={switchMode}>{isSignUp ? "Have already account, login" : "Do not have account, sign in"}</Button>
+            </Grid>
+          </Grid>
         </form>
       </Paper>
     </Container>
