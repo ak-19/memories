@@ -11,8 +11,8 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setSignUp] = useState(false);
 
-  const handleSubmit = (e) => {};
-  const handleChange = (e) => {};
+  const handleSubmit = (e) => { };
+  const handleChange = (e) => { };
   const handleShowPassword = (e) => setShowPassword((prevState) => !prevState);
 
   const switchMode = () => {
