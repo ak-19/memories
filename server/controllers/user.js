@@ -28,8 +28,6 @@ export const userSignUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT))
 
-        console.log(hashedPassword);
-
         const result = await User.create({ email, firstName, lastName, password: hashedPassword })
 
         const token = jwt.sign({ email, id: result._id }, process.env.SECRET, { expiresIn: '1h' })

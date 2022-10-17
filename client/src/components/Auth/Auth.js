@@ -23,7 +23,6 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
 
     if (isSignUp) {
       dispatch(signUp(formData, history))
