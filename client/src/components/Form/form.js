@@ -7,10 +7,12 @@ import './form.css';
 
 export default function Form({ currentId, setCurrentId }) {
     const [postData, setPostData] = useState({
-        creator: '', message: '', title: '', tags: '', selectedFile: ''
+        message: '', title: '', tags: '', selectedFile: ''
     })
 
     const post = useSelector((state) => currentId ? state.posts.find(p => p._id === currentId) : null)
+
+    const user = JSON.parse(localStorage.getItem('profile'))
 
     useEffect(() => {
         if (post) setPostData(post)
@@ -22,26 +24,36 @@ export default function Form({ currentId, setCurrentId }) {
     const clearForm = () => {
         setCurrentId(null)
         setPostData({
-            creator: '', message: '', title: '', tags: '', selectedFile: ''
+            message: '', title: '', tags: '', selectedFile: ''
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(user);
 
         if (currentId) {
-            dispatch(updatePost(currentId, postData))
+            dispatch(updatePost(currentId, { ...postData, name: user?.result?.firstName }))
         } else {
-            dispatch(createPost(postData))
+            dispatch(createPost({ ...postData, name: user?.result?.firstName }))
         }
         clearForm()
+    }
+
+    if (!user?.result?.firstName) {
+        return (
+            <Paper className="paper">
+                <Typography variant='h6' aligned="center">
+                    Please, sign in to make your own stories
+                </Typography>
+            </Paper>
+        )
     }
 
     return (
         <Paper className="paper">
             <form autoComplete="off" noValidate className="root form" onSubmit={handleSubmit}>
                 <Typography variant='h6'>{currentId ? 'Editing' : 'Creating'} a memory </Typography>
-                <TextField className="input-box" name="creator" variant="outlined" label="Creator" fullWidth value={postData.creator} onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
                 <TextField className="input-box" name="message" variant="outlined" label="Message" fullWidth value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
                 <TextField className="input-box" name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
                 <TextField className="input-box" name="tags" variant="outlined" label="Tags" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
