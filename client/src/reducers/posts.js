@@ -4,6 +4,8 @@ const reducer = (posts = [], action) => {
             return [...posts, action.payload]
         case 'FETCH_ALL':
             return action.payload;
+        case 'FETCH_SEARCH':
+            return action.payload;
         case 'UPDATE':
         case 'LIKE':
             return posts.map(post => action.payload._id === post._id ? action.payload : post);

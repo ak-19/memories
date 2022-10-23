@@ -13,6 +13,8 @@ API.interceptors.request.use((req) => {
 })
 
 export const fetchPosts = () => API.get('posts')
+export const fetchPostsSearch = (searchQuery) => API.get(`posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags || ''}`)
+
 export const makePost = (newPost) => API.post('posts', newPost)
 export const updatePost = (id, postData) => API.patch(`posts/${id}`, postData)
 export const deletePost = (id) => API.delete(`posts/${id}`)
