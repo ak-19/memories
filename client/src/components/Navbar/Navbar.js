@@ -4,8 +4,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
-import memories from '../../images/memories.png';
-
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
@@ -36,8 +34,7 @@ const Navbar = () => {
   return (
     <AppBar className="appBar" position="static" color="inherit">
       <div className="brandContainer">
-        <Typography component={Link} to="/" className="heading" variant="h2" align="center">Memories</Typography>
-        <img className="image" src={memories} alt="icon" height="60" />
+        <Typography component={Link} to="/" className="heading" variant="h2" align="center">My image stories</Typography>
       </div>
       <Toolbar className="toolbar">
         {user?.result ? (
