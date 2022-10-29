@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button } from '@mui/material';
+import { AppBar, Typography, Toolbar, Button, Box } from '@mui/material';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
@@ -32,22 +32,23 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <AppBar className="appBar" position="static" color="inherit">
-      <div className="brandContainer">
-        <Typography component={Link} to="/" className="heading" variant="h2" align="center">My image stories</Typography>
-      </div>
-      <Toolbar className="toolbar">
-        {user?.result ? (
-          <div className="profile">
-            <Avatar className="purple" alt={user?.result.firstName} src={user?.result.imageUrl}>{user?.result.firstName.charAt(0)}</Avatar>
-            <Typography className="userName" variant="h6">{user?.result.name}</Typography>
-            <Button variant="contained" className="logout" color="secondary" onClick={logout}>Logout</Button>
-          </div>
-        ) : (
-          <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
-        )}
-      </Toolbar>
-    </AppBar>
+
+    <Box sx={{ flexGrow: 1, marginBottom: '20px' }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography component={Link} to="/" variant="h4" sx={{ flexGrow: 1 }}>
+            My image stories
+          </Typography>
+          {user?.result ? (
+            <Button variant="contained" color="primary" onClick={logout}>Logout</Button>
+          ) : (
+            <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
+
+
   );
 };
 
