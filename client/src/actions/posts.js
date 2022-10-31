@@ -1,9 +1,10 @@
 import * as api from '../api';
 
-export const getPost = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
     try {
-        const { data } = await api.fetchPosts();
-        dispatch({ type: 'FETCH_ALL', payload: data })
+        const { data: payload } = await api.fetchPosts(page);
+        console.log(payload);
+        dispatch({ type: 'FETCH_ALL', payload })
     } catch (error) {
         console.log(error.message);
     }
@@ -11,7 +12,8 @@ export const getPost = () => async (dispatch) => {
 
 export const getPostsSearch = (searchQuery) => async (dispatch) => {
     try {
-        const { data: { data } } = await api.fetchPostsSearch(searchQuery)
+        const { data } = await api.fetchPostsSearch(searchQuery)
+        console.log('actions posts = ', data);
         dispatch({ type: 'FETCH_SEARCH', payload: data })
     } catch (error) {
         console.log(error.message);

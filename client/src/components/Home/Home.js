@@ -7,7 +7,7 @@ import ChipInput from 'material-ui-chip-input';
 
 import Form from '../Form/form';
 import Posts from '../Posts/posts';
-import { getPost, getPostsSearch } from '../../actions/posts';
+import { getPosts, getPostsSearch } from '../../actions/posts';
 import Paginator from '../Paginator/paginator';
 import './Home.css'
 
@@ -17,10 +17,13 @@ function useQuery() {
 
 function Home() {
     const dispatch = useDispatch();
-    const [currentId, setCurrentId] = useState(null);
+    const [currentId, setCurrentId] = useState(0);
 
     const query = useQuery();
     const history = useNavigate();
+
+    const page = query.get('page') || 1;
+    const searchQuery = query.get('searchQuery')
 
     const [search, setSearch] = useState('');
     const [tags, setTags] = useState([]);
@@ -35,7 +38,6 @@ function Home() {
     const handleDelete = (tag) => { setTags(tags.filter(t => t !== tag)) }
 
     const searchPost = () => {
-        console.log('Tags =' + tags);
         if (search.trim() || tags.length) {
             dispatch(getPostsSearch({ tags: tags.join(','), search }))
             history(`/posts/search?searchQuery=${search.trim()}&tags=${tags.join(',')}`);
@@ -45,14 +47,14 @@ function Home() {
     }
 
     useEffect(() => {
-        dispatch(getPost())
+        dispatch(getPosts(page))
     }, [dispatch])
 
     return (
         <Grow in>
-            <Container>
-                <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-                    <Grid item xs={12} sm={7}><Posts setCurrentId={setCurrentId} /></Grid>
+            <Container maxWidth="xl">
+                <Grid container justify="space-between" alignItems="stretch" spacing={3} className="gridContainer">
+                    <Grid item xs={12} sm={6} md={9}><Posts setCurrentId={setCurrentId} /></Grid>
                     <Grid item xs={12} sm={6} md={3}>
                         <AppBar className="appBarSearch" position="static" color="inherit">
                             <TextField
@@ -75,9 +77,12 @@ function Home() {
                             <Button onClick={searchPost} className="searchButton" color="primary" varian="contained">Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        <Paper elevation={6} className="pagination">
-                            <Paginator />
-                        </Paper>
+                        {(!searchQuery && !tags.length) && (
+                            <Paper elevation={6} className="pagination">
+                                <Paginator page={page} />
+                            </Paper>
+                        )}
+
                     </Grid>
                 </Grid>
             </Container>

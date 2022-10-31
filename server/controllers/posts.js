@@ -1,10 +1,19 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
 
-export const getPosts = async (_, res) => {
+export const getPosts = async (req, res) => {
+  const { page } = req.query;
   try {
-    const response = await PostMessage.find();
-    res.status(200).json(response);
+
+    console.log('sent page', page);
+
+    const limit = 8;
+    const startIndex = (Number(page) - 1) * limit;
+    const total = await PostMessage.countDocuments({});
+
+    const posts = await PostMessage.find().sort({ _id: -1 }).limit(limit).skip(startIndex);
+
+    res.status(200).json({ posts, currentPage: Number(page), numberOfPages: Math.ceil(total / limit), });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -14,8 +23,8 @@ export const getPostsSearch = async (req, res) => {
   try {
     const { searchQuery, tags } = req.query;
     const title = new RegExp(searchQuery, 'i');
-    const data = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
-    res.status(200).json({ data });
+    const posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
+    res.status(200).json({ posts });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
