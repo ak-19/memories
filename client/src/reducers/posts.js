@@ -1,9 +1,9 @@
 const reducer = (data = {}, action) => {
     switch (action.type) {
         case 'CREATE':
-            return { ...data, ...action.payload }
+            return { ...data, posts: [...data.posts, action.payload] };
         case 'FETCH_ALL':
-            return action.payload;
+            return { ...data, ...action.payload };
         case 'FETCH_SEARCH':
             return { ...data, ...action.payload }
         case 'UPDATE':
