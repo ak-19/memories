@@ -10,7 +10,9 @@ export default function Form({ currentId, setCurrentId }) {
         message: '', title: '', tags: '', selectedFile: ''
     })
 
-    const post = useSelector((state) => currentId ? state.posts.find(p => p._id === currentId) : null)
+    const post = useSelector(({ data }) => {
+        return currentId ? data.posts.find(p => p._id === currentId) : null
+    })
 
     const user = JSON.parse(localStorage.getItem('profile'))
 

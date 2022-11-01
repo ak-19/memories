@@ -7,6 +7,7 @@ const reducer = (data = {}, action) => {
         case 'FETCH_SEARCH':
             return { ...data, ...action.payload }
         case 'UPDATE':
+            return { ...data, posts: data.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };
         case 'LIKE':
             return { ...data, posts: data.posts.map(post => action.payload._id === post._id ? action.payload : post) };
         case 'DELETE':
