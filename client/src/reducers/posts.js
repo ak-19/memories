@@ -8,9 +8,9 @@ const reducer = (data = {}, action) => {
             return { ...data, ...action.payload }
         case 'UPDATE':
         case 'LIKE':
-            return data.posts.map(post => action.payload._id === post._id ? action.payload : post);
+            return { ...data, posts: data.posts.map(post => action.payload._id === post._id ? action.payload : post) };
         case 'DELETE':
-            return data.posts.filter(post => action.payload !== post._id);
+            return { ...data, posts: data.posts.filter(post => action.payload !== post._id) };
         default:
             return { ...data }
     }
